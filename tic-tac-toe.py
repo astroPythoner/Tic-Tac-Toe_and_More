@@ -612,6 +612,7 @@ class Game():
             if self.multi_on_one == False:
                 if self.check_key_pressed(PLACE, self.current_player) and self.board.get_box(*self.player.get_pos()).get_state() == None:
                     self.runde += 1
+                    placing_sound.play()
                     self.last_placing = pygame.time.get_ticks()
                     self.board.set_box(*self.player.get_pos(), self.current_player)
                     if not self.with_falling:
@@ -645,6 +646,7 @@ class Game():
             else:
                 if self.check_key_pressed(PLACE, 0) and self.board.get_box(*self.player.get_pos()).get_state() == None:
                     self.runde += 1
+                    placing_sound.play()
                     self.last_placing = pygame.time.get_ticks()
                     self.board.set_box(*self.player.get_pos(), self.current_player)
                     if not self.with_falling:
@@ -679,6 +681,7 @@ class Game():
             if self.check_key_pressed(PLACE) and self.board.get_box(*self.player.get_pos()).get_state() == None:
                 self.last_placing = pygame.time.get_ticks()
                 self.runde += 1
+                placing_sound.play()
                 self.board.set_box(*self.player.get_pos(), self.current_player)
                 if not self.with_falling:
                     if self.get_win_boxes(*self.player.get_pos(), self.current_player) != False:

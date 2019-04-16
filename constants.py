@@ -46,8 +46,8 @@ PLAYER_WON_COLOR_GREEN = (70,200,70)
 font_name = pygame.font.match_font('arial')
 
 # Lautstärke
-game_sound_volume = 0.6
-
+game_music_volume = 1
+game_sound_volume = 0.2
 
 def load_graphics_from_file_array(file_array, dir, color_key=None, convert_aplha=False, as_dict=False):
     # Lädt alle Dateien des file_array's aus dem Pfad dir. Ein leeres file_array bedeutet alle Dateien des Pfades lesen.
@@ -89,3 +89,10 @@ snd_dir = path.join(path.dirname(__file__), 'snd')
 background = load_graphics_from_file_array(["startfield.png"], img_dir)
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 background_rect = background.get_rect()
+
+placing_sound = pygame.mixer.Sound(path.join(snd_dir, 'placing.wav'))
+placing_sound.set_volume(game_sound_volume)
+
+pygame.mixer.music.load(path.join(snd_dir, 'Background_music.ogg'))
+pygame.mixer.music.set_volume(game_music_volume)
+pygame.mixer.music.play(loops=-1)
