@@ -271,11 +271,11 @@ class Game():
             # Jeden gefundenen Kontroller zut Auswahl stellen
             for controller in self.all_joysticks:
                 if self.all_joysticks.index(controller) == selected_controller_num:
-                    self.draw_text(surf, controller.get_name(), 30, WIDTH / 2 - 10, HEIGHT / 1.9 + 35 * self.all_joysticks.index(controller), rect_place="oben_rechts", color=RED)
+                    self.draw_text(surf, controller.get_name(), 30, WIDTH / 2 - 10, HEIGHT / 1.9 + 35 * self.all_joysticks.index(controller), rect_place="oben_rechts", color=TEXT_RED)
                 else:
                     self.draw_text(surf, controller.get_name(), 28, WIDTH / 2 - 10, HEIGHT / 1.9 + 35 * self.all_joysticks.index(controller), rect_place="oben_rechts")
                 if controller in selected_controllers:
-                    self.draw_text(surf, "bestätigt", 18, WIDTH / 2 + 10, HEIGHT / 1.9 + 8 + 35 * self.all_joysticks.index(controller), color=GREEN, rect_place="oben_links")
+                    self.draw_text(surf, "bestätigt", 18, WIDTH / 2 + 10, HEIGHT / 1.9 + 8 + 35 * self.all_joysticks.index(controller), color=TEXT_GREEN, rect_place="oben_links")
                 else:
                     self.draw_text(surf, "nicht bestätigt", 18, WIDTH / 2 + 10, HEIGHT / 1.9 + 8 + 35 * self.all_joysticks.index(controller), rect_place="oben_links")
             pygame.display.flip()
@@ -428,7 +428,7 @@ class Game():
             höhe = HEIGHT/3
         for text_num in range(0,len(texte)):
             if text_num == selected:
-                self.draw_text(surf, texte[text_num], 34, WIDTH / 2, höhe + (40*text_num), color=RED, rect_place="mitte")
+                self.draw_text(surf, texte[text_num], 34, WIDTH / 2, höhe + (40*text_num), color=TEXT_RED, rect_place="mitte")
             else:
                 self.draw_text(surf, texte[text_num], 25, WIDTH / 2, höhe + (40*text_num), rect_place="mitte")
 

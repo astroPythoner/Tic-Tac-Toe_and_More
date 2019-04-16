@@ -33,16 +33,14 @@ XY = "xy"
 # Standartfarben
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 65, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
+TEXT_RED = (255, 65, 0)
+TEXT_GREEN = (100,150,50)
 TEXT_COLOR = (0,0,125)
 PLAYER_SELECT = (80,105,190)
 PLAYER_COLOR_RED = (255,50,0)
 PLAYER_WON_COLOR_RED = (255,100,70)
-PLAYER_COLOR_GREEN = (10,255,10)
-PLAYER_WON_COLOR_GREEN = (50,200,50)
+PLAYER_COLOR_GREEN = (20,240,20)
+PLAYER_WON_COLOR_GREEN = (70,200,70)
 
 # finde passendste Schriftart zu arial.
 font_name = pygame.font.match_font('arial')
