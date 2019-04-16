@@ -32,7 +32,8 @@ class Game():
 
         # Spieler, der gerade am Zug ist
         self.current_player = 0
-        self.player_colors = [RED,GREEN]
+        self.player_colors = [PLAYER_COLOR_RED,PLAYER_COLOR_GREEN]
+        self.player_won_colors = [PLAYER_WON_COLOR_RED,PLAYER_WON_COLOR_GREEN]
         self.last_placing = pygame.time.get_ticks()
 
         # Spielwerte (Gewonnene/verlorerene Spiele, wie vielte Spielrunde, ...)
@@ -71,7 +72,7 @@ class Game():
             self.all_joysticks.append(my_joystick)
             print("found_joystick: " + my_joystick.get_name())
 
-    def draw_text(self, surf, text, size, x, y, color=WHITE, rect_place="oben_mitte"):
+    def draw_text(self, surf, text, size, x, y, color=TEXT_COLOR, rect_place="oben_mitte"):
         # Zeichnet den text in der color auf die surf.
         # x und y sind die Koordinaten des Punktes rect_place. rect_place kann "oben_mitte", "oben_links" oder "oben_rechts" sein.
         font = pygame.font.Font(font_name, size)
@@ -593,7 +594,10 @@ class Game():
         self.current_player_box = Box(self,  WIDTH - ((WIDTH - (WIDTH*3/4)) / 2) - self.rect_size/2, 80)
         self.all_sprites.add(self.current_player_box)
 
-        self.player = Player(self, player_num=self.current_player)
+        if self.multi_on_one:
+            self.player = Player(self, player_num=self.current_player, joystick_num=0)
+        else:
+            self.player = Player(self, player_num=self.current_player)
         self.all_sprites.add(self.player)
 
         self.game_status = None

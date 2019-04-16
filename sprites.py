@@ -169,7 +169,7 @@ class Box(pygame.sprite.Sprite):
         pygame.draw.circle(self.image, self.game.player_colors[1], (int(self.image.get_width()/2),int(self.image.get_height()/2)), int(self.radius), int(self.game.icon_line_size))
 
     def mark_as_won(self):
-        self.image.fill(WON_COLOR)
+        self.image.fill(self.game.player_won_colors[self.state])
         if self.state == 1:
             pygame.draw.circle(self.image, self.game.player_colors[1], (int(self.image.get_width() / 2), int(self.image.get_height() / 2)), int(self.radius), int(self.game.icon_line_size))
         else:

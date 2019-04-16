@@ -33,12 +33,16 @@ XY = "xy"
 # Standartfarben
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
+RED = (255, 65, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
-PLAYER_SELECT = (60,85,170)
-WON_COLOR = (50,200,50)
+TEXT_COLOR = (0,0,125)
+PLAYER_SELECT = (80,105,190)
+PLAYER_COLOR_RED = (255,50,0)
+PLAYER_WON_COLOR_RED = (255,100,70)
+PLAYER_COLOR_GREEN = (10,255,10)
+PLAYER_WON_COLOR_GREEN = (50,200,50)
 
 # finde passendste Schriftart zu arial.
 font_name = pygame.font.match_font('arial')
@@ -84,6 +88,6 @@ def load_graphics_from_file_array(file_array, dir, color_key=None, convert_aplha
 img_dir = path.join(path.dirname(__file__), 'img')
 snd_dir = path.join(path.dirname(__file__), 'snd')
 
-background = load_graphics_from_file_array(["starfield.png"], img_dir)
+background = load_graphics_from_file_array(["startfield.png"], img_dir)
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 background_rect = background.get_rect()
