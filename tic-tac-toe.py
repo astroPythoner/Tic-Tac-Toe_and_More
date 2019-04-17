@@ -2,6 +2,7 @@ import pygame
 import time
 from joystickpins import JoystickPins, KeyboardStick
 from constants import *
+from computer_player import *
 from sprites import *
 
 class Game():
@@ -40,7 +41,12 @@ class Game():
         self.player0_wins = 0
         self.player1_wins = 0
         self.unentschieden = 0
-        self.runde = 0
+        self.runde = 1
+
+        # Für Computergegner
+        self.go_on_automatically = False
+        self.weg = None
+        self.r2 = None
 
     def set_spielfeldwerte(self):
         if self.with_falling:
@@ -343,7 +349,9 @@ class Game():
             if self.check_key_pressed(DOWN)and last_switch + 300 < pygame.time.get_ticks():
                 last_switch = pygame.time.get_ticks()
                 selected += 1
-                if selected > 5:
+                if self.multiplayer == False and selected > 1:
+                    selected = 1
+                elif self.multiplayer == True and selected > 5:
                     selected = 5
             # Standart tic -tac-toe mit A/B bzw. Pfeiltaste auswählen
             if self.check_key_pressed(PLACE) and last_switch + 300 < pygame.time.get_ticks():
@@ -430,7 +438,10 @@ class Game():
             if text_num == selected:
                 self.draw_text(surf, texte[text_num], 34, WIDTH / 2, höhe + (40*text_num), color=TEXT_RED, rect_place="mitte")
             else:
-                self.draw_text(surf, texte[text_num], 25, WIDTH / 2, höhe + (40*text_num), rect_place="mitte")
+                if calling_reason == MAIN_SETTING and not self.multiplayer and text_num > 1:
+                    self.draw_text(surf, texte[text_num], 20, WIDTH / 2, höhe + (40 * text_num), rect_place="mitte", color=TEXT_GREY)
+                else:
+                    self.draw_text(surf, texte[text_num], 25, WIDTH / 2, höhe + (40*text_num), rect_place="mitte")
 
         # Standart Texte
         self.draw_text(surf, "TAM!", 64, WIDTH / 2, HEIGHT / 6.5)
@@ -541,6 +552,33 @@ class Game():
         else:
             return []
 
+    def make_computer_move(self):
+        if self.spielfeldhoehe == 3 and self.spielfeldbreite == 3 and self.needed_lenght_to_win == 3 and self.with_falling == False:
+            zu_setzten = make_tic_tac_toe_move(self, self.runde)
+            if zu_setzten != False or zu_setzten == 0:
+                x = int((zu_setzten-(zu_setzten%self.spielfeldbreite))/self.spielfeldbreite)
+                y = int(zu_setzten%self.spielfeldbreite)
+                self.board.get_box(x,y).mark_o()
+                self.runde += 1
+                if self.get_win_boxes(x,y, 1) != False:
+                    print("Computer hat gewonnen")
+                    self.player1_wins += 1
+                    self.current_player_box.kill()
+                    self.game_status = END_GAME
+                    for x in self.get_win_boxes(x,y, 1):
+                        x.mark_as_won()
+                else:
+                    if self.board.is_completely_full():
+                        print("unendschieden")
+                        self.unentschieden += 1
+                        self.current_player_box.kill()
+                        self.game_status = UNENDSCHIEDEN
+                    else:
+                        self.player = Player(self, player_num=self.current_player)
+                        self.all_sprites.add(self.player)
+        elif self.spielfeldbreite == 9 and self.spielfeldbreite == 6 and self.needed_lenght_to_win == 4 and self.with_falling == True:
+            pass
+            # ToDo: 4 gewinnt Computer
 
     ########## Hier startet das eigentliche Spiel ##########
     def start_game(self):
@@ -606,6 +644,10 @@ class Game():
         self.last_placing = pygame.time.get_ticks()
 
         self.runde = 0
+
+        self.go_on_automatically = False
+        self.weg = None
+        self.r2 = None
 
     def handle_selection(self):
         if self.multiplayer and self.last_placing + 800 < pygame.time.get_ticks():
@@ -704,8 +746,7 @@ class Game():
                             self.game_status = UNENDSCHIEDEN
                         else:
                             self.player.kill()
-                            self.player = Player(self, player_num=self.current_player)
-                            self.all_sprites.add(self.player)
+                            self.make_computer_move()
                 else:
                     self.player.kill()
 
