@@ -119,6 +119,9 @@ class Game():
                     if check_for == XY:
                         if joystick.get_X() or joystick.get_Y():
                             return True
+                    if check_for == X:
+                        if joystick.get_X():
+                            return True
                     if check_for == ESC:
                         if joystick.get_select() and joystick.get_start():
                             return True
@@ -146,6 +149,9 @@ class Game():
                         return True
                 if check_for == XY:
                     if self.all_joysticks[joystick_num].get_X() or self.all_joysticks[joystick_num].get_Y():
+                        return True
+                if check_for == X:
+                    if self.all_joysticks[joystick_num].get_X():
                         return True
                 if check_for == ESC:
                     if self.all_joysticks[joystick_num].get_select() and self.all_joysticks[joystick_num].get_start():
@@ -178,6 +184,9 @@ class Game():
                         return True
                 if check_for == XY:
                     if joystick.get_X() or joystick.get_Y():
+                        return True
+                if check_for == X:
+                    if joystick.get_X():
                         return True
                 if check_for == ESC:
                     if joystick.get_select() and joystick.get_start():
@@ -490,6 +499,7 @@ class Game():
         self.draw_text(surf, str(self.player1_wins), 30, center_x, center_y + 220)
 
         pygame.display.flip()
+        time.sleep(1)
 
         waiting = True
         while waiting:
@@ -614,6 +624,11 @@ class Game():
             self.all_sprites.update()
 
             self.handle_selection()
+
+            # Mit X Spiel abbrechen
+            if self.check_key_pressed(X):
+                self.current_player_box.kill()
+                self.game_status = UNENDSCHIEDEN
 
             # Skalen und Texte auf den Bildschirm malen
             self.all_sprites.draw(screen)

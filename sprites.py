@@ -1,7 +1,5 @@
 import pygame
 from constants import *
-import random
-from itertools import product
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, player_num = 0, color = PLAYER_SELECT, joystick_num = None):

@@ -20,6 +20,7 @@ BEFORE_FIRST_GAME = "before first game"
 NEXT_GAME = "next game"
 UNENDSCHIEDEN = "unendschieden"
 MAIN_SETTING = "main settings"
+
 LEFT = "left"
 RIGHT = "right"
 UP = "up"
@@ -29,6 +30,7 @@ ESC = "escape"
 ALL = "all"
 START = "start"
 XY = "xy"
+X = "x"
 
 # Standartfarben
 WHITE = (255, 255, 255)
@@ -48,7 +50,7 @@ font_name = pygame.font.match_font('arial')
 
 # Lautstärke
 game_music_volume = 1
-game_sound_volume = 0.2
+game_sound_volume = 0.3
 
 def load_graphics_from_file_array(file_array, dir, color_key=None, convert_aplha=False, as_dict=False):
     # Lädt alle Dateien des file_array's aus dem Pfad dir. Ein leeres file_array bedeutet alle Dateien des Pfades lesen.
