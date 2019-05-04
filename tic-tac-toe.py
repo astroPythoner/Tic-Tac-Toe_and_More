@@ -467,7 +467,7 @@ class Game():
                 self.draw_text(surf, "A/D oder Joystick zum erhöhen oder verringern", 20, WIDTH / 2, HEIGHT * 3 / 4)
 
     def show_game_info(self, surf, center_x, y):
-        self.draw_text(surf,"Spieler {}".format(self.current_player),50,center_x,y,self.player_colors[self.current_player])
+        self.draw_text(surf,"Spieler {}".format(self.current_player+1),50,center_x,y,self.player_colors[self.current_player])
         center_y = HEIGHT/2
         self.draw_text(surf,"Runde: {}".format(self.runde),25,center_x,center_y-30)
         self.draw_text(surf, "Spieler1", 30, center_x, center_y +20)
@@ -479,27 +479,27 @@ class Game():
 
     def show_end_game_info(self, surf, center_x, y):
         if self.game_status == END_GAME:
-            self.draw_text(surf, "Spieler "+str(self.current_player), 50, center_x, y, self.player_colors[self.current_player])
+            self.draw_text(surf, "Spieler "+str(self.current_player+1), 50, center_x, y, self.player_colors[self.current_player])
             self.draw_text(surf, "gewinnt", 50, center_x, y+50, self.player_colors[self.current_player])
         elif self.game_status == UNENDSCHIEDEN:
-            self.draw_text(surf, "Unend-", 50, center_x, y)
+            self.draw_text(surf, "Unent-", 50, center_x, y)
             self.draw_text(surf, "schieden", 50, center_x, y+50)
         if not self.game_status == BEFORE_FIRST_GAME:
             self.draw_text(surf, "Start zum Nochmalspielen", 20, center_x, y + 185)
             self.draw_text(surf, "X/Y für Einstellungen", 20, center_x, y + 215)
+            self.all_sprites.draw(screen)
         else:
             self.draw_text(surf, "Start zum Tic-Tac-Toe spielen", 50, center_x, y + 120)
             self.draw_text(surf, "X/Y oder Pfeiltasten für Einstellungen", 50, center_x, y + 200)
         center_y = HEIGHT / 2
         self.draw_text(surf, "Spieler1", 30, center_x, center_y +20)
-        self.draw_text(surf, "Unendschieden", 30, center_x, center_y + 100)
+        self.draw_text(surf, "Unentschieden", 30, center_x, center_y + 100)
         self.draw_text(surf, "Spieler2", 30, center_x, center_y + 180)
         self.draw_text(surf, str(self.player0_wins), 30, center_x, center_y + 60)
         self.draw_text(surf, str(self.unentschieden), 30, center_x, center_y + 140)
         self.draw_text(surf, str(self.player1_wins), 30, center_x, center_y + 220)
-
         pygame.display.flip()
-        time.sleep(1)
+        time.sleep(0.5)
 
         waiting = True
         while waiting:
@@ -572,6 +572,7 @@ class Game():
                 self.runde += 1
                 if self.get_win_boxes(x,y, 1) != False:
                     print("Computer hat gewonnen")
+                    self.current_player = 1
                     self.player1_wins += 1
                     self.current_player_box.kill()
                     self.game_status = END_GAME
@@ -579,7 +580,7 @@ class Game():
                         x.mark_as_won()
                 else:
                     if self.board.is_completely_full():
-                        print("unendschieden")
+                        print("unentschieden")
                         self.unentschieden += 1
                         self.current_player_box.kill()
                         self.game_status = UNENDSCHIEDEN
@@ -646,6 +647,9 @@ class Game():
 
         self.current_player_box = Box(self,  WIDTH - ((WIDTH - (WIDTH*3/4)) / 2) - self.rect_size/2, 80)
         self.all_sprites.add(self.current_player_box)
+
+        if not self.multiplayer:
+            self.current_player = 0
 
         if self.multi_on_one:
             self.player = Player(self, player_num=self.current_player, joystick_num=0)
