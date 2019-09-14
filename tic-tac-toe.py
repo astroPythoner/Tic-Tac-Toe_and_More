@@ -129,6 +129,9 @@ class Game():
                     if check_for == START:
                         if joystick.get_start():
                             return True
+                    if check_for == SELECT:
+                        if joystick.get_select():
+                            return True
                     if check_for == ALL:
                         if joystick.get_A() or joystick.get_B() or joystick.get_X() or joystick.get_Y() or joystick.get_start() or joystick.get_shoulder_left() or joystick.get_shoulder_right() or joystick.get_axis_left() or joystick.get_axis_right() or joystick.get_axis_up() or joystick.get_axis_down():
                             return True
@@ -159,6 +162,9 @@ class Game():
                         return True
                 if check_for == START:
                     if self.all_joysticks[joystick_num].get_start():
+                        return True
+                if check_for == SELECT:
+                    if self.all_joysticks[joystick_num].get_select():
                         return True
                 if check_for == ALL:
                     if self.all_joysticks[joystick_num].get_A() or self.all_joysticks[joystick_num].get_B() or self.all_joysticks[joystick_num].get_X() or self.all_joysticks[joystick_num].get_Y()\
@@ -194,6 +200,9 @@ class Game():
                         return True
                 if check_for == START:
                     if joystick.get_start():
+                        return True
+                if check_for == SELECT:
+                    if joystick.get_select():
                         return True
                 if check_for == ALL:
                     if joystick.get_A() or joystick.get_B() or joystick.get_X() or joystick.get_Y() or joystick.get_start() or joystick.get_shoulder_left() or joystick.get_shoulder_right() or joystick.get_axis_left() or joystick.get_axis_right() or joystick.get_axis_up() or joystick.get_axis_down():
@@ -472,7 +481,7 @@ class Game():
         center_y = HEIGHT/2
         self.draw_text(surf,"Runde: {}".format(self.runde),25,center_x,center_y-30)
         self.draw_text(surf, "Spieler1", 30, center_x, center_y +20)
-        self.draw_text(surf, "Unendschieden", 30, center_x, center_y + 100)
+        self.draw_text(surf, "Unentschieden", 30, center_x, center_y + 100)
         self.draw_text(surf, "Spieler2", 30, center_x, center_y + 180)
         self.draw_text(surf, str(self.player0_wins), 30, center_x, center_y + 60)
         self.draw_text(surf, str(self.unentschieden),30, center_x, center_y + 140)
@@ -488,6 +497,7 @@ class Game():
         if not self.game_status == BEFORE_FIRST_GAME:
             self.draw_text(surf, "Start zum Nochmalspielen", 20, center_x, y + 185)
             self.draw_text(surf, "X/Y für Einstellungen", 20, center_x, y + 215)
+            self.draw_text(surf, "Select zum zurücksetzten", 20, center_x, y + 145)
             self.all_sprites.draw(screen)
         else:
             self.draw_text(surf, "Start zum Tic-Tac-Toe spielen", 50, center_x, y + 120)
@@ -511,6 +521,11 @@ class Game():
                     pygame.quit()
             # mit Start geht's weiter
             if self.check_key_pressed(START):
+                waiting = False
+            if self.check_key_pressed(SELECT):
+                self.player0_wins = 0
+                self.player1_wins = 0
+                self.unentschieden = 0
                 waiting = False
             if self.check_key_pressed(XY):
                 self.settings(screen)
@@ -691,7 +706,7 @@ class Game():
                                 x.mark_as_won()
                         else:
                             if self.board.is_completely_full():
-                                print("unendschieden")
+                                print("unentschieden")
                                 self.unentschieden += 1
                                 self.player.kill()
                                 self.current_player_box.kill()
@@ -725,7 +740,7 @@ class Game():
                                 x.mark_as_won()
                         else:
                             if self.board.is_completely_full():
-                                print("unendschieden")
+                                print("unentschieden")
                                 self.unentschieden += 1
                                 self.player.kill()
                                 self.current_player_box.kill()
@@ -759,7 +774,7 @@ class Game():
                             x.mark_as_won()
                     else:
                         if self.board.is_completely_full():
-                            print("unendschieden")
+                            print("unentschieden")
                             self.unentschieden += 1
                             self.player.kill()
                             self.current_player_box.kill()

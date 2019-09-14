@@ -29,6 +29,7 @@ PLACE = "place"
 ESC = "escape"
 ALL = "all"
 START = "start"
+SELECT = "select"
 XY = "xy"
 X = "x"
 
