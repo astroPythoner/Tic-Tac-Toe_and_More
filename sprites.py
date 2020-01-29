@@ -19,8 +19,6 @@ class Player(pygame.sprite.Sprite):
         # Rechteck
         self.rect_surf = pygame.Surface((self.game.rect_size+self.game.size_between_rects, self.game.rect_size+self.game.size_between_rects))#.convert_alpha()
         self.rect_surf.fill(color)
-        #self.rect_surf.set_alpha(50)
-        #self.backgournd_image = #ToDo
         self.image = self.rect_surf
         self.rect = self.image.get_rect()
         # Position der Spielers in Feldern

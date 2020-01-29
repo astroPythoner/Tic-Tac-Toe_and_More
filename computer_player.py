@@ -356,5 +356,5 @@ def make_tic_tac_toe_move(game, runde):
                 game.go_on_automatically = True
                 return 3
 
-    print("upsiiis")
+    print("upsiiis",runde,game.go_on_automatically,game.weg)
     return False

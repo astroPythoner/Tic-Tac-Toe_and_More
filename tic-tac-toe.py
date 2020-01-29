@@ -599,8 +599,10 @@ class Game():
                         print("unentschieden")
                         self.unentschieden += 1
                         self.current_player_box.kill()
+                        self.current_player = 0
                         self.game_status = UNENDSCHIEDEN
                     else:
+                        self.player.kill()
                         self.player = Player(self, player_num=self.current_player)
                         self.all_sprites.add(self.player)
         elif self.spielfeldbreite == 9 and self.spielfeldbreite == 6 and self.needed_lenght_to_win == 4 and self.with_falling == True:
@@ -637,7 +639,7 @@ class Game():
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            # Alle Spieler, Gegner, Meteoriten, ... updaten. (Ruft die Funktion 'update()' von allen Sprites, die in der Gruppe all_sprites liegen auf)
+            # update Funktion aller sprites aufrufen
             self.all_sprites.update()
 
             self.handle_selection()
@@ -657,32 +659,37 @@ class Game():
     def new(self):
         self.all_sprites = pygame.sprite.LayeredUpdates()
 
+        self.runde = 0
+
         self.board = Board(self)
         for box in self.board.boxes:
             self.all_sprites.add(box)
 
-        self.current_player_box = Box(self,  WIDTH - ((WIDTH - (WIDTH*3/4)) / 2) - self.rect_size/2, 80)
-        self.all_sprites.add(self.current_player_box)
-
-        if not self.multiplayer:
+        # Computer spieler zurücksetzen
+        self.go_on_automatically = False
+        self.weg = None
+        self.r2 = None
+        if self.multiplayer == False and self.current_player == 1: #Single-player Computer beginnt und dann ist Spieler dran
+            self.make_computer_move()
             self.current_player = 0
 
+        # Spieler neu erstellen
+        self.current_player_box = Box(self,  WIDTH - ((WIDTH - (WIDTH*3/4)) / 2) - self.rect_size/2, 80)
+        self.all_sprites.add(self.current_player_box)
+        try:
+            self.player.kill()
+        except Exception:
+            pass
         if self.multi_on_one:
             self.player = Player(self, player_num=self.current_player, joystick_num=0)
         else:
             self.player = Player(self, player_num=self.current_player)
         self.all_sprites.add(self.player)
 
+        # Andere Spielwerte zurücksetzen
         self.game_status = None
         self.running = True
-
         self.last_placing = pygame.time.get_ticks()
-
-        self.runde = 0
-
-        self.go_on_automatically = False
-        self.weg = None
-        self.r2 = None
 
     def handle_selection(self):
         if self.multiplayer and self.last_placing + 800 < pygame.time.get_ticks():
@@ -710,11 +717,10 @@ class Game():
                                 self.unentschieden += 1
                                 self.player.kill()
                                 self.current_player_box.kill()
+                                self.current_player = [1, 0][self.current_player]
                                 self.game_status = UNENDSCHIEDEN
                             else:
-                                self.current_player += 1
-                                if self.current_player > 1:
-                                    self.current_player = 0
+                                self.current_player = [1, 0][self.current_player]
                                 self.player.kill()
                                 self.player = Player(self, player_num=self.current_player)
                                 self.all_sprites.add(self.player)
@@ -744,11 +750,10 @@ class Game():
                                 self.unentschieden += 1
                                 self.player.kill()
                                 self.current_player_box.kill()
+                                self.current_player = [1, 0][self.current_player]
                                 self.game_status = UNENDSCHIEDEN
                             else:
-                                self.current_player += 1
-                                if self.current_player > 1:
-                                    self.current_player = 0
+                                self.current_player = [1, 0][self.current_player]
                                 self.player.kill()
                                 self.player = Player(self, player_num=self.current_player, joystick_num=0)
                                 self.all_sprites.add(self.player)
@@ -778,6 +783,7 @@ class Game():
                             self.unentschieden += 1
                             self.player.kill()
                             self.current_player_box.kill()
+                            self.current_player = [1, 0][self.current_player]
                             self.game_status = UNENDSCHIEDEN
                         else:
                             self.player.kill()
