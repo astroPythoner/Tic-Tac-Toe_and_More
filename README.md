@@ -38,9 +38,9 @@ Ist Runterfallend auf ja fliegen die Steine runter (wie bei vier gewinnt).
 
 Oben gibt es noch die Standart Einstellungen für Tic-Tac-Toe und 4-gewinnt.
 
-![image not found](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot1.png)
-![](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot2.png)
-![](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot3.png)
+![image not found](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot1.png?token=AIE42JADC256AFORVAH5EIK6G44ES)
+![](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot2.png?token=AIE42JCJOPOUE3IJFBDI2G26G44GA)
+![](https://raw.githubusercontent.com/astroPythoner/Tic-Tac-Toe_and_More/master/img/screenshot3.png?token=AIE42JHKPFL5DFZB3LNUKVC6G44IC)
 
 ***
 
