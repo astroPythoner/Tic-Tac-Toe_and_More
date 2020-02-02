@@ -1,5 +1,5 @@
-# Tic-Tac-Toe adn More
-Tic TacToe und 4 gewinnt mit pygame
+# Tic-Tac-Toe and More
+Tic Tac Toe und 4 gewinnt mit pygame
 
 # Ausführen
 ```
