@@ -368,11 +368,11 @@ class Game():
             if self.check_key_pressed(DOWN)and last_switch + 300 < pygame.time.get_ticks():
                 last_switch = pygame.time.get_ticks()
                 selected += 1
-                if self.multiplayer == False and selected > 1:
-                    selected = 1
+                if self.multiplayer == False and selected > 0:
+                    selected = 0
                 elif self.multiplayer == True and selected > 5:
                     selected = 5
-            # Standart tic -tac-toe mit A/B bzw. Pfeiltaste auswählen
+            # Standart tic -tac-toe oder 4-gewinnt mit A/B bzw. Pfeiltaste auswählen
             if self.check_key_pressed(PLACE) and last_switch + 300 < pygame.time.get_ticks():
                 last_switch = pygame.time.get_ticks()
                 if selected == 0:
@@ -457,7 +457,7 @@ class Game():
             if text_num == selected:
                 self.draw_text(surf, texte[text_num], 34, WIDTH / 2, höhe + (40*text_num), color=TEXT_RED, rect_place="mitte")
             else:
-                if calling_reason == MAIN_SETTING and not self.multiplayer and text_num > 1:
+                if calling_reason == MAIN_SETTING and not self.multiplayer and text_num > 0:
                     self.draw_text(surf, texte[text_num], 20, WIDTH / 2, höhe + (40 * text_num), rect_place="mitte", color=TEXT_GREY)
                 else:
                     self.draw_text(surf, texte[text_num], 25, WIDTH / 2, höhe + (40*text_num), rect_place="mitte")
