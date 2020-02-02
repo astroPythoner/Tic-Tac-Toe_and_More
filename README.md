@@ -1,5 +1,5 @@
-# Shmup
-Shoot them up! Space invaders like game with pygame
+# Tic-Tac-Toe adn More
+Tic TacToe und 4 gewinnt mit pygame
 
 # Ausführen
 ```
