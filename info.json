@@ -1,0 +1,8 @@
+{
+  "name": "Tic-Tac-Toe and More",
+  "description": "Tic-Tac-Toe in unterschiedlichen Variationen in einem Spiel. Passe die Spielfeldgröße an. Spiele auch 4-gewinnt. Zu zweit könnt ihr beliebige Variationen Spielen, alleine kannst du gegen den Computer Tic-Tac-Toe spielen.",
+  "type": "Denkspiel",
+  "author": "AstroPythoner",
+  "players": "1 to 2",
+  "playable with": ["Controller","Tastatur als Controller"]
+}

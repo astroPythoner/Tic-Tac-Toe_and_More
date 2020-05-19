@@ -3,7 +3,7 @@ Tic Tac Toe und 4 gewinnt mit pygame
 
 # Ausführen
 ```
-python3 tic-tac-toe.py
+python3 main.py
 ```
 
 # Notwendige Bibliotheken
